@@ -1,14 +1,15 @@
+import { HangManContextProvider } from "../contexts/useHangManContext";
 import HangmanFigure from "./HangmanFigure";
 import LetterInput from "./LetterInput";
 import WordDisplay from "./WordDisplay";
 
 function GameBoard() {
   return (
-    <div>
+    <HangManContextProvider>
       <HangmanFigure />
       <WordDisplay />
       <LetterInput />
-    </div>
+    </HangManContextProvider>
   );
 }
 
