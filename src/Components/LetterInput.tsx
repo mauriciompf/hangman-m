@@ -30,7 +30,8 @@ function LetterInput() {
     "Z",
   ];
 
-  const { setLetterInput } = useHangManContext();
+  const { setLetterInput, correctLetters, incorrectLetters } =
+    useHangManContext();
 
   return (
     <div className="mt-10 flex flex-wrap justify-center gap-2">
@@ -38,7 +39,10 @@ function LetterInput() {
         <button
           onClick={() => setLetterInput(letter)}
           key={letter}
-          className="cursor-pointer rounded-sm border-x-4 border-t-2 border-b-8 border-gray-300 p-1 px-5 font-bold"
+          disabled={
+            correctLetters.includes(letter) || incorrectLetters.includes(letter)
+          }
+          className={`${correctLetters.includes(letter) || incorrectLetters.includes(letter) ? "cursor-not-allowed opacity-30" : "cursor-pointer"} rounded-sm border-x-4 border-t-2 border-b-8 border-gray-300 p-1 px-5 font-bold select-none`}
         >
           {letter}
         </button>

@@ -13,6 +13,8 @@ interface HangManContextValues {
   setLetterInput: Dispatch<SetStateAction<string>>;
   correctLetters: string[];
   setCorrectLetters: Dispatch<SetStateAction<string[]>>;
+  incorrectLetters: string[];
+  setIncorrectLetters: Dispatch<SetStateAction<string[]>>;
 }
 
 const HangManContext = createContext<HangManContextValues | null>(null);
@@ -21,6 +23,7 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [words, setWords] = useState<string>("BULLDOG");
   const [letterInput, setLetterInput] = useState<string>("");
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
+  const [incorrectLetters, setIncorrectLetters] = useState<string[]>([]);
 
   return (
     <HangManContext.Provider
@@ -31,6 +34,8 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
         setLetterInput,
         correctLetters,
         setCorrectLetters,
+        incorrectLetters,
+        setIncorrectLetters,
       }}
     >
       {children}
