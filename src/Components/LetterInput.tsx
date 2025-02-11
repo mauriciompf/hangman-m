@@ -32,7 +32,6 @@ function LetterInput() {
 
   const { setLetterInput, correctLetters, incorrectLetters } =
     useHangManContext();
-
   return (
     <div className="mt-10 flex flex-wrap justify-center gap-2">
       {letters.map((letter) => (
