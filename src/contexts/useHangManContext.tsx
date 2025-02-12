@@ -3,8 +3,15 @@ import {
   Dispatch,
   SetStateAction,
   useContext,
+  useEffect,
   useState,
 } from "react";
+
+interface Topics {
+  topic: string;
+  words: string;
+  id: number;
+}
 
 interface HangManContextValues {
   words: string;
@@ -17,9 +24,20 @@ interface HangManContextValues {
   setIncorrectLetters: Dispatch<SetStateAction<string[]>>;
   isOver: boolean;
   setIsOver: Dispatch<SetStateAction<boolean>>;
+  topics: Topics[];
+  setTopics: Dispatch<SetStateAction<Topics[]>>;
 }
 
 const HangManContext = createContext<HangManContextValues | null>(null);
+
+async function getData() {
+  const response = await fetch("/data.json");
+  const json = await response.json();
+
+  if (!response.ok) throw new Error("...");
+
+  return json;
+}
 
 function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [words, setWords] = useState<string>("BULLDOG");
@@ -27,6 +45,20 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
   const [incorrectLetters, setIncorrectLetters] = useState<string[]>([]);
   const [isOver, setIsOver] = useState<boolean>(false);
+  const [topics, setTopics] = useState<Topics[]>([]);
+
+  useEffect(() => {
+    const getTopics = async () => {
+      try {
+        const data = await getData();
+        setTopics(data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getTopics();
+  }, []);
 
   return (
     <HangManContext.Provider
@@ -41,6 +73,8 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
         setIncorrectLetters,
         isOver,
         setIsOver,
+        topics,
+        setTopics,
       }}
     >
       {children}

@@ -1,0 +1,39 @@
+[
+  {
+    "topic": "Famous Landmarks",
+    "words": [
+      "Eiffel Tower",
+      "Great Wall of China",
+      "Statue of Liberty",
+      "Machu Picchu",
+      "Taj Mahal"
+    ],
+    "id": 0
+  },
+  {
+    "topic": "Animals",
+    "words": ["Elephant", "Dolphin", "Tiger", "Penguin", "Kangaroo"],
+    "id": 1
+  },
+  {
+    "topic": "Fruits & Vegetables",
+    "words": ["Apple", "Carrot", "Banana", "Broccoli", "Strawberry"],
+    "id": 2
+  },
+  {
+    "topic": "Video Games",
+    "words": [
+      "The Legend of Zelda",
+      "Minecraft",
+      "Super Mario Odyssey",
+      "Elden Ring",
+      "Super Metroid"
+    ],
+    "id": 3
+  },
+  {
+    "topic": "Musical Instruments",
+    "words": ["Piano", "Guitar", "Violin", "Drums", "Saxophone"],
+    "id": 4
+  }
+]

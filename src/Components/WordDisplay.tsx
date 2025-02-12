@@ -8,7 +8,12 @@ function WordDisplay() {
     correctLetters,
     setCorrectLetters,
     setIncorrectLetters,
+    topics,
   } = useHangManContext();
+
+  if (topics) {
+    console.log(topics);
+  }
 
   useEffect(() => {
     if (words.includes(letterInput) && !correctLetters.includes(letterInput)) {
