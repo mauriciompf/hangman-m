@@ -15,6 +15,8 @@ interface HangManContextValues {
   setCorrectLetters: Dispatch<SetStateAction<string[]>>;
   incorrectLetters: string[];
   setIncorrectLetters: Dispatch<SetStateAction<string[]>>;
+  isOver: boolean;
+  setIsOver: Dispatch<SetStateAction<boolean>>;
 }
 
 const HangManContext = createContext<HangManContextValues | null>(null);
@@ -24,6 +26,7 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [letterInput, setLetterInput] = useState<string>("");
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
   const [incorrectLetters, setIncorrectLetters] = useState<string[]>([]);
+  const [isOver, setIsOver] = useState<boolean>(false);
 
   return (
     <HangManContext.Provider
@@ -36,6 +39,8 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
         setCorrectLetters,
         incorrectLetters,
         setIncorrectLetters,
+        isOver,
+        setIsOver,
       }}
     >
       {children}

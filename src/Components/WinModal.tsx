@@ -1,8 +1,20 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { closeIcon } from "./Icons";
+import { useHangManContext } from "../contexts/useHangManContext";
 
 function WinModal() {
   const winRef = useRef<HTMLDivElement | null>(null);
+
+  const { setIsOver, words } = useHangManContext();
+
+  useEffect(() => {
+    setIsOver(true);
+  }, [setIsOver]);
+
+  const handleCloseModal = () => {
+    winRef.current?.remove();
+    setIsOver(false);
+  };
 
   return (
     <div
@@ -12,13 +24,14 @@ function WinModal() {
       <h1 className="text-center text-2xl font-bold">You Win!</h1>
 
       <div className="mt-4 grid gap-2">
+        <p>Word: {words}</p>
         <p>Hour: </p>
         <p>Incorrect guesses: </p>
         <p>Timer: </p>
       </div>
 
       <button
-        onClick={() => winRef.current?.remove()}
+        onClick={handleCloseModal}
         className="absolute top-3 right-4 cursor-pointer"
       >
         {closeIcon}

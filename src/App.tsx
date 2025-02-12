@@ -1,9 +1,12 @@
 import GameBoard from "./Components/GameBoard";
+import { HangManContextProvider } from "./contexts/useHangManContext";
 
 function App() {
   return (
     <main>
-      <GameBoard />
+      <HangManContextProvider>
+        <GameBoard />
+      </HangManContextProvider>
     </main>
   );
 }

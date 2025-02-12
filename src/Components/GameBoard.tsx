@@ -1,17 +1,21 @@
-import { HangManContextProvider } from "../contexts/useHangManContext";
+import { useHangManContext } from "../contexts/useHangManContext";
 import GameOverModal from "./GameOverModal";
 import HangmanFigure from "./HangmanFigure";
 import LetterInput from "./LetterInput";
 import WordDisplay from "./WordDisplay";
 
 function GameBoard() {
+  const { isOver } = useHangManContext();
+
   return (
-    <HangManContextProvider>
+    <>
       <GameOverModal />
-      <HangmanFigure />
-      <WordDisplay />
-      <LetterInput />
-    </HangManContextProvider>
+      <div className={`${isOver && "cursor-default opacity-50"} `}>
+        <HangmanFigure />
+        <WordDisplay />
+        <LetterInput />
+      </div>
+    </>
   );
 }
 
