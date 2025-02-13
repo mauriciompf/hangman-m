@@ -9,41 +9,58 @@ function WordDisplay() {
     setCorrectLetters,
     setIncorrectLetters,
     topics,
+    randomWord,
+    loading,
+    setRandomWord,
   } = useHangManContext();
 
-  if (topics) {
-    console.log(topics);
-  }
+  const randomNumber = (n: number) => Math.floor(Math.random() * n);
 
   useEffect(() => {
-    if (words.includes(letterInput) && !correctLetters.includes(letterInput)) {
-      setCorrectLetters((prev) => [letterInput, ...prev]);
+    if (topics && topics.length > 0) {
+      const topicNames = topics.map((a) => a.topic);
+      setRandomWord(topicNames[randomNumber(topicNames.length)]);
     }
+  }, [topics, setRandomWord]);
 
-    if (!words.includes(letterInput)) {
-      setIncorrectLetters((prev) => [letterInput, ...prev]);
-    }
-  }, [
-    letterInput,
-    setCorrectLetters,
-    setIncorrectLetters,
-    words,
-    correctLetters,
-  ]);
+  // ! Get word from topic
+  // ! Store word
+
+  // useEffect(() => {
+  //   if (
+  //     randomWord.includes(letterInput) &&
+  //     !correctLetters.includes(letterInput)
+  //   ) {
+  //     setCorrectLetters((prev) => [letterInput, ...prev]);
+  //   }
+
+  //   if (!randomWord.includes(letterInput)) {
+  //     setIncorrectLetters((prev) => [letterInput, ...prev]);
+  //   }
+  // }, [
+  //   letterInput,
+  //   setCorrectLetters,
+  //   setIncorrectLetters,
+  //   randomWord,
+  //   correctLetters,
+  // ]);
 
   return (
-    <div className="mt-20">
-      <div className="flex flex-wrap justify-center gap-x-4 gap-y-15">
-        {words.split("").map((letter, index) => (
-          <div key={index} className="grid place-items-center">
-            <div className="h-10 text-3xl font-bold select-none">
-              {correctLetters.includes(letter) ? letter : ""}
+    loading &&
+    randomWord && (
+      <div className="mt-20">
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-15">
+          {randomWord.split("").map((letter, index) => (
+            <div key={index} className="grid place-items-center">
+              <div className="h-10 text-3xl font-bold select-none">
+                {correctLetters.includes(letter) ? letter : ""}
+              </div>
+              <div className="h-1.5 w-13 bg-black"></div>
             </div>
-            <div className="h-1.5 w-13 bg-black"></div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
-    </div>
+    )
   );
 }
 

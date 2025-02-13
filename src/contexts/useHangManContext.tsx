@@ -26,6 +26,10 @@ interface HangManContextValues {
   setIsOver: Dispatch<SetStateAction<boolean>>;
   topics: Topics[];
   setTopics: Dispatch<SetStateAction<Topics[]>>;
+  randomWord: string;
+  setRandomWord: Dispatch<SetStateAction<string>>;
+  loading: boolean;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 }
 
 const HangManContext = createContext<HangManContextValues | null>(null);
@@ -46,14 +50,18 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [incorrectLetters, setIncorrectLetters] = useState<string[]>([]);
   const [isOver, setIsOver] = useState<boolean>(false);
   const [topics, setTopics] = useState<Topics[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [randomWord, setRandomWord] = useState<string>("");
 
   useEffect(() => {
     const getTopics = async () => {
       try {
         const data = await getData();
         setTopics(data);
+        setLoading(true);
       } catch (err) {
         console.error(err);
+        setLoading(false);
       }
     };
 
@@ -75,6 +83,10 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
         setIsOver,
         topics,
         setTopics,
+        randomWord,
+        setRandomWord,
+        loading,
+        setLoading,
       }}
     >
       {children}
