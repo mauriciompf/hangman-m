@@ -3,47 +3,27 @@ import { useHangManContext } from "../contexts/useHangManContext";
 
 function WordDisplay() {
   const {
-    words,
-    letterInput,
     correctLetters,
-    setCorrectLetters,
-    setIncorrectLetters,
-    topics,
-    randomWord,
+    randomTopic,
     loading,
+    topics,
     setRandomWord,
+    randomWord,
   } = useHangManContext();
 
   const randomNumber = (n: number) => Math.floor(Math.random() * n);
 
   useEffect(() => {
-    if (topics && topics.length > 0) {
-      const topicNames = topics.map((a) => a.topic);
-      setRandomWord(topicNames[randomNumber(topicNames.length)]);
+    if (!topics && !randomTopic) return;
+
+    const currentTopic = topics.find((obj) => obj.topic === randomTopic);
+
+    if (currentTopic) {
+      setRandomWord(
+        currentTopic.words[randomNumber(currentTopic.words.length)],
+      );
     }
-  }, [topics, setRandomWord]);
-
-  // ! Get word from topic
-  // ! Store word
-
-  // useEffect(() => {
-  //   if (
-  //     randomWord.includes(letterInput) &&
-  //     !correctLetters.includes(letterInput)
-  //   ) {
-  //     setCorrectLetters((prev) => [letterInput, ...prev]);
-  //   }
-
-  //   if (!randomWord.includes(letterInput)) {
-  //     setIncorrectLetters((prev) => [letterInput, ...prev]);
-  //   }
-  // }, [
-  //   letterInput,
-  //   setCorrectLetters,
-  //   setIncorrectLetters,
-  //   randomWord,
-  //   correctLetters,
-  // ]);
+  }, [topics, randomTopic]);
 
   return (
     loading &&

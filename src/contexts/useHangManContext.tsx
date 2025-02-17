@@ -26,10 +26,12 @@ interface HangManContextValues {
   setIsOver: Dispatch<SetStateAction<boolean>>;
   topics: Topics[];
   setTopics: Dispatch<SetStateAction<Topics[]>>;
-  randomWord: string;
-  setRandomWord: Dispatch<SetStateAction<string>>;
+  randomTopic: string | null;
+  setRandomTopic: Dispatch<SetStateAction<string | null>>;
   loading: boolean;
   setLoading: Dispatch<SetStateAction<boolean>>;
+  randomWord: string | null;
+  setRandomWord: Dispatch<SetStateAction<string | null>>;
 }
 
 const HangManContext = createContext<HangManContextValues | null>(null);
@@ -51,7 +53,10 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [isOver, setIsOver] = useState<boolean>(false);
   const [topics, setTopics] = useState<Topics[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
-  const [randomWord, setRandomWord] = useState<string>("");
+  const [randomTopic, setRandomTopic] = useState<string | null>(
+    JSON.parse(localStorage.getItem("topic") as string),
+  );
+  const [randomWord, setRandomWord] = useState<string | null>("");
 
   useEffect(() => {
     const getTopics = async () => {
@@ -83,10 +88,12 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
         setIsOver,
         topics,
         setTopics,
-        randomWord,
-        setRandomWord,
+        randomTopic,
+        setRandomTopic,
         loading,
         setLoading,
+        randomWord,
+        setRandomWord,
       }}
     >
       {children}
