@@ -9,16 +9,16 @@ function GameOverModal() {
   const [isWin, setIsWin] = useState(false);
 
   useEffect(() => {
+    if (correctLetters.length === randomWord?.replaceAll(" ", "")!.length) {
+      setTimeout(() => {
+        setIsWin(true);
+      }, 1500);
+    }
+
     if (incorrectLetters.length === 6) {
       setTimeout(() => {
         setIsLose(true);
       }, 500);
-    }
-
-    if (correctLetters.length === randomWord?.replace(" ", "")!.length) {
-      setTimeout(() => {
-        setIsWin(true);
-      }, 1500);
     }
   }, [correctLetters, randomWord]);
 

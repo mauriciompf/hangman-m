@@ -28,23 +28,27 @@ function WordDisplay() {
       );
     }
 
-    if (randomWord) {
+    if (randomWord && letterInput) {
       localStorage.setItem("word", JSON.stringify(randomWord));
 
       const wordUpperCase = randomWord.toUpperCase();
+      const occurrences = wordUpperCase
+        .split("")
+        .filter((l) => l === letterInput);
 
-      if (
-        wordUpperCase.includes(letterInput) &&
-        !correctLetters.includes(letterInput)
-      ) {
-        setCorrectLetters((prev) => [letterInput, ...prev]);
+      if (occurrences.length > 0) {
+        setCorrectLetters((prev) => [...prev, ...occurrences]);
       }
 
       if (!wordUpperCase.includes(letterInput)) {
-        setIncorrectLetters((prev) => [letterInput, ...prev]);
+        setIncorrectLetters((prev) => [...prev, letterInput]);
       }
     }
   }, [topics, randomTopic, letterInput, randomWord]);
+
+  console.log("correctLetters", correctLetters);
+  console.log("randomTopic", randomTopic);
+  console.log("randomWord", randomWord, randomWord?.length);
 
   return (
     loading &&

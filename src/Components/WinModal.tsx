@@ -27,27 +27,26 @@ function WinModal() {
   };
 
   const handleNextWord = () => {
-    handleCloseModal();
+    setIncorrectLetters([]);
+    setCorrectLetters([]);
 
-    if (!topics && !randomTopic) return;
+    handleCloseModal();
 
     if (topics && topics.length > 0) {
       const topicNames = topics.map((a) => a.topic);
       setRandomTopic(topicNames[randomNumber(topicNames.length)]);
+      localStorage.setItem("topic", JSON.stringify(randomTopic));
     }
 
     const currentTopic = topics.find((obj) => obj.topic === randomTopic);
 
-    localStorage.setItem("word", JSON.stringify(randomWord));
-    setRandomWord(
-      currentTopic!.words[randomNumber(currentTopic!.words.length)],
-    );
-
-    setIncorrectLetters([]);
-    setCorrectLetters([]);
+    if (currentTopic) {
+      setRandomWord(
+        currentTopic.words[randomNumber(currentTopic.words.length)],
+      );
+      localStorage.setItem("word", JSON.stringify(randomWord));
+    }
   };
-
-  console.log(randomWord);
 
   return (
     <div
