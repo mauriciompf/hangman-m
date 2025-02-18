@@ -4,7 +4,7 @@ import LoseModal from "./LoseModal";
 import { useEffect, useState } from "react";
 
 function GameOverModal() {
-  const { correctLetters, incorrectLetters, words } = useHangManContext();
+  const { correctLetters, incorrectLetters, randomWord } = useHangManContext();
   const [isLose, setIsLose] = useState(false);
   const [isWin, setIsWin] = useState(false);
 
@@ -15,12 +15,12 @@ function GameOverModal() {
       }, 500);
     }
 
-    if (correctLetters.length - 1 === words.length) {
+    if (correctLetters.length === randomWord?.replace(" ", "")!.length) {
       setTimeout(() => {
         setIsWin(true);
       }, 1500);
     }
-  });
+  }, [correctLetters, randomWord]);
 
   return (
     <>

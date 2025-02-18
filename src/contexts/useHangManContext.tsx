@@ -14,8 +14,6 @@ interface Topics {
 }
 
 interface HangManContextValues {
-  words: string;
-  setWords: Dispatch<SetStateAction<string>>;
   letterInput: string;
   setLetterInput: Dispatch<SetStateAction<string>>;
   correctLetters: string[];
@@ -46,7 +44,6 @@ async function getData() {
 }
 
 function HangManContextProvider({ children }: { children: React.ReactNode }) {
-  const [words, setWords] = useState<string>("BULLDOG");
   const [letterInput, setLetterInput] = useState<string>("");
   const [correctLetters, setCorrectLetters] = useState<string[]>([]);
   const [incorrectLetters, setIncorrectLetters] = useState<string[]>([]);
@@ -56,7 +53,9 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [randomTopic, setRandomTopic] = useState<string | null>(
     JSON.parse(localStorage.getItem("topic") as string),
   );
-  const [randomWord, setRandomWord] = useState<string | null>("");
+  const [randomWord, setRandomWord] = useState<string | null>(
+    JSON.parse(localStorage.getItem("word")!),
+  );
 
   useEffect(() => {
     const getTopics = async () => {
@@ -76,8 +75,6 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
   return (
     <HangManContext.Provider
       value={{
-        words,
-        setWords,
         letterInput,
         setLetterInput,
         correctLetters,

@@ -5,7 +5,7 @@ import { useHangManContext } from "../contexts/useHangManContext";
 function LoseModal() {
   const loseRef = useRef<HTMLDivElement | null>(null);
 
-  const { setIsOver, words } = useHangManContext();
+  const { setIsOver, randomWord } = useHangManContext();
 
   useEffect(() => {
     setIsOver(true);
@@ -24,7 +24,7 @@ function LoseModal() {
       <h1 className="text-center text-2xl font-bold">You Lose!</h1>
 
       <div className="mt-4 grid gap-2">
-        <p>Word: {words}</p>
+        <p>Word: {randomWord}</p>
         <p>Hour: </p>
         <p>Incorrect guesses: </p>
         <p>Timer: </p>
