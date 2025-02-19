@@ -1,12 +1,18 @@
 import { useHangManContext } from "../contexts/useHangManContext";
 import WinModal from "./WinModal";
 import LoseModal from "./LoseModal";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 function GameOverModal() {
-  const { correctLetters, incorrectLetters, randomWord } = useHangManContext();
-  const [isLose, setIsLose] = useState(false);
-  const [isWin, setIsWin] = useState(false);
+  const {
+    correctLetters,
+    incorrectLetters,
+    randomWord,
+    isLose,
+    setIsWin,
+    setIsLose,
+    isWin,
+  } = useHangManContext();
 
   useEffect(() => {
     if (correctLetters.length === randomWord?.replaceAll(" ", "")!.length) {
@@ -20,7 +26,7 @@ function GameOverModal() {
         setIsLose(true);
       }, 500);
     }
-  }, [correctLetters, randomWord]);
+  }, [correctLetters, incorrectLetters, randomWord]);
 
   return (
     <>

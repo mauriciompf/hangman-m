@@ -46,9 +46,8 @@ function WordDisplay() {
     }
   }, [topics, randomTopic, letterInput, randomWord]);
 
-  console.log("correctLetters", correctLetters);
-  console.log("randomTopic", randomTopic);
-  console.log("randomWord", randomWord, randomWord?.length);
+  // console.log("randomTopic", randomTopic);
+  // console.log("randomWord", randomWord, randomWord?.length);
 
   return (
     loading &&

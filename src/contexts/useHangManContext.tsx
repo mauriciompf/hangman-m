@@ -30,6 +30,10 @@ interface HangManContextValues {
   setLoading: Dispatch<SetStateAction<boolean>>;
   randomWord: string | null;
   setRandomWord: Dispatch<SetStateAction<string | null>>;
+  isLose: boolean;
+  setIsLose: Dispatch<SetStateAction<boolean>>;
+  isWin: boolean;
+  setIsWin: Dispatch<SetStateAction<boolean>>;
 }
 
 const HangManContext = createContext<HangManContextValues | null>(null);
@@ -56,6 +60,8 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [randomWord, setRandomWord] = useState<string | null>(
     JSON.parse(localStorage.getItem("word")!),
   );
+  const [isLose, setIsLose] = useState(false);
+  const [isWin, setIsWin] = useState(false);
 
   useEffect(() => {
     const getTopics = async () => {
@@ -91,6 +97,10 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
         setLoading,
         randomWord,
         setRandomWord,
+        isLose,
+        setIsLose,
+        isWin,
+        setIsWin,
       }}
     >
       {children}

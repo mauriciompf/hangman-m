@@ -12,9 +12,10 @@ function WinModal() {
     setIncorrectLetters,
     setCorrectLetters,
     topics,
-    randomTopic,
     setRandomWord,
     setRandomTopic,
+    setLetterInput,
+    setIsWin,
   } = useHangManContext();
 
   useEffect(() => {
@@ -22,29 +23,32 @@ function WinModal() {
   }, [setIsOver]);
 
   const handleCloseModal = () => {
-    winRef.current?.remove();
     setIsOver(false);
+    setIsWin(false);
+    // winRef.current?.remove();
   };
 
   const handleNextWord = () => {
+    if (!topics) return;
+
     setIncorrectLetters([]);
     setCorrectLetters([]);
+    setLetterInput("");
 
     handleCloseModal();
 
-    if (topics && topics.length > 0) {
-      const topicNames = topics.map((a) => a.topic);
-      setRandomTopic(topicNames[randomNumber(topicNames.length)]);
-      localStorage.setItem("topic", JSON.stringify(randomTopic));
-    }
+    const topicNames = topics.map((a) => a.topic);
+    const newTopic = topicNames[randomNumber(topicNames.length)];
+    setRandomTopic(newTopic);
+    localStorage.setItem("topic", JSON.stringify(newTopic));
 
-    const currentTopic = topics.find((obj) => obj.topic === randomTopic);
+    const currentTopic = topics.find((obj) => obj.topic === newTopic);
 
     if (currentTopic) {
-      setRandomWord(
-        currentTopic.words[randomNumber(currentTopic.words.length)],
-      );
-      localStorage.setItem("word", JSON.stringify(randomWord));
+      const newWord =
+        currentTopic.words[randomNumber(currentTopic.words.length)];
+      setRandomWord(newWord);
+      localStorage.setItem("word", JSON.stringify(newWord));
     }
   };
 
