@@ -16,19 +16,24 @@ function WinModal() {
     setRandomTopic,
     setLetterInput,
     setIsWin,
+    isWin,
+    setPrevWords,
+    prevWords,
   } = useHangManContext();
 
   useEffect(() => {
     setIsOver(true);
-  }, [setIsOver]);
+  }, [setIsOver, prevWords, isWin]);
 
   const handleCloseModal = () => {
     setIsOver(false);
     setIsWin(false);
-    // winRef.current?.remove();
   };
 
   const handleNextWord = () => {
+    const getWord = JSON.parse(localStorage.getItem("word")!);
+    setPrevWords((prev) => [...prev, getWord]);
+
     if (!topics) return;
 
     setIncorrectLetters([]);
