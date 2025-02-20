@@ -13,6 +13,7 @@ function WordDisplay() {
     letterInput,
     setCorrectLetters,
     setIncorrectLetters,
+    incorrectLetters,
   } = useHangManContext();
 
   useEffect(() => {
@@ -45,6 +46,11 @@ function WordDisplay() {
       }
     }
   }, [topics, randomTopic, letterInput, randomWord]);
+
+  useEffect(() => {
+    localStorage.setItem("correctLetters", JSON.stringify(correctLetters));
+    localStorage.setItem("incorrectLetters", JSON.stringify(incorrectLetters));
+  }, [correctLetters, incorrectLetters]);
 
   // console.log("randomTopic", randomTopic);
   // console.log("randomWord", randomWord, randomWord?.length);

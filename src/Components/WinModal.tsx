@@ -50,8 +50,15 @@ function WinModal() {
     const currentTopic = topics.find((obj) => obj.topic === newTopic);
 
     if (currentTopic) {
-      const newWord =
-        currentTopic.words[randomNumber(currentTopic.words.length)];
+      let newWord;
+      let attempts = 0;
+      const maxAttempts = currentTopic.words.length;
+
+      do {
+        newWord = currentTopic.words[randomNumber(currentTopic.words.length)];
+        attempts++;
+      } while (prevWords.includes(newWord) && attempts < maxAttempts);
+
       setRandomWord(newWord);
       localStorage.setItem("word", JSON.stringify(newWord));
     }

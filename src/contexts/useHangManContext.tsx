@@ -51,20 +51,27 @@ async function getData() {
 
 function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [letterInput, setLetterInput] = useState<string>("");
-  const [correctLetters, setCorrectLetters] = useState<string[]>([]);
-  const [incorrectLetters, setIncorrectLetters] = useState<string[]>([]);
+  const [correctLetters, setCorrectLetters] = useState<string[]>(
+    JSON.parse(localStorage.getItem("correctLetters")!) || [],
+  );
+  const [incorrectLetters, setIncorrectLetters] = useState<string[]>(() => {
+    const item = localStorage.getItem("incorrectLetters");
+    return item ? JSON.parse(item) : [];
+  });
   const [isOver, setIsOver] = useState<boolean>(false);
   const [topics, setTopics] = useState<Topics[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [randomTopic, setRandomTopic] = useState<string | null>(
-    JSON.parse(localStorage.getItem("topic") as string),
+    JSON.parse(localStorage.getItem("topic") as string) || "",
   );
   const [randomWord, setRandomWord] = useState<string | null>(
-    JSON.parse(localStorage.getItem("word")!),
+    JSON.parse(localStorage.getItem("word") as string) || "",
   );
   const [isLose, setIsLose] = useState(false);
   const [isWin, setIsWin] = useState(false);
   const [prevWords, setPrevWords] = useState<string[]>([]);
+
+  // console.log(prevWords);
 
   useEffect(() => {
     const getTopics = async () => {
@@ -80,8 +87,6 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
 
     getTopics();
   }, []);
-
-  console.log(prevWords);
 
   return (
     <HangManContext.Provider
