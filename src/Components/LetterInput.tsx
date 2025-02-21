@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useHangManContext } from "../contexts/useHangManContext";
 
 function LetterInput() {
@@ -49,6 +50,20 @@ function LetterInput() {
 
     setLetterInput(letter);
   };
+
+  useEffect(() => {
+    const keyPress = (e: KeyboardEvent) => {
+      if (letters.includes(e.key.toUpperCase())) {
+        console.log(e.key);
+      }
+    };
+
+    window.addEventListener("keydown", keyPress);
+
+    return () => {
+      window.removeEventListener("keydown", keyPress);
+    };
+  }, []);
 
   return (
     <div className="mt-10 flex flex-wrap justify-center gap-2">
