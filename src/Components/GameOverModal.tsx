@@ -2,6 +2,7 @@ import { useHangManContext } from "../contexts/useHangManContext";
 import WinModal from "./WinModal";
 import LoseModal from "./LoseModal";
 import { useEffect } from "react";
+import ResetModal from "./ResetModal";
 
 function GameOverModal() {
   const {
@@ -12,6 +13,7 @@ function GameOverModal() {
     setIsWin,
     setIsLose,
     isWin,
+    isReset,
   } = useHangManContext();
 
   useEffect(() => {
@@ -30,6 +32,7 @@ function GameOverModal() {
 
   return (
     <>
+      {isReset && <ResetModal />}
       {isWin && <WinModal />}
       {isLose && <LoseModal />}
     </>

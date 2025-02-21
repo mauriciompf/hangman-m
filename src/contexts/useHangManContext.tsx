@@ -36,6 +36,8 @@ interface HangManContextValues {
   setIsWin: Dispatch<SetStateAction<boolean>>;
   prevWords: string[];
   setPrevWords: Dispatch<SetStateAction<string[]>>;
+  isReset: boolean;
+  setIsReset: Dispatch<SetStateAction<boolean>>;
 }
 
 const HangManContext = createContext<HangManContextValues | null>(null);
@@ -70,8 +72,7 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
   const [isLose, setIsLose] = useState(false);
   const [isWin, setIsWin] = useState(false);
   const [prevWords, setPrevWords] = useState<string[]>([]);
-
-  // console.log(prevWords);
+  const [isReset, setIsReset] = useState(false);
 
   useEffect(() => {
     const getTopics = async () => {
@@ -113,6 +114,8 @@ function HangManContextProvider({ children }: { children: React.ReactNode }) {
         setIsWin,
         prevWords,
         setPrevWords,
+        isReset,
+        setIsReset,
       }}
     >
       {children}

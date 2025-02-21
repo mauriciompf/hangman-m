@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { closeIcon } from "./Icons";
 import { useHangManContext } from "../contexts/useHangManContext";
+import useNextWord from "../customHooks/useNextWord";
 
 function LoseModal() {
   const loseRef = useRef<HTMLDivElement | null>(null);
 
-  const { setIsOver, randomWord } = useHangManContext();
+  const { setIsOver, randomWord, setIsLose } = useHangManContext();
+  const { resetGameState, selectNewWord } = useNextWord();
+
   const [showWord, setShowWord] = useState(false);
 
   useEffect(() => {
@@ -13,8 +16,19 @@ function LoseModal() {
   }, [setIsOver]);
 
   const handleCloseModal = () => {
-    loseRef.current?.remove();
+    setIsLose(false);
     setIsOver(false);
+  };
+
+  const handleAnotherWord = () => {
+    handleCloseModal();
+    resetGameState();
+    selectNewWord();
+  };
+
+  const handleTryAgain = () => {
+    handleCloseModal();
+    resetGameState();
   };
 
   return (
@@ -25,7 +39,7 @@ function LoseModal() {
       <h1 className="text-center text-2xl font-bold">You Lose!</h1>
 
       <div className="mt-4 grid gap-2">
-        <p>
+        <div>
           Word:{" "}
           <span
             onClick={() => setShowWord(true)}
@@ -35,10 +49,21 @@ function LoseModal() {
               {randomWord}
             </span>
           </span>
-        </p>
-        <p>Hour: </p>
-        <p>Incorrect guesses: </p>
-        <p>Timer: </p>
+          <p>Hour: </p>
+          <p>Incorrect guesses: </p>
+          <p>Timer: </p>
+        </div>
+        <div className="flex gap-4 font-bold">
+          <button
+            onClick={handleAnotherWord}
+            className="cursor-pointer bg-white"
+          >
+            Try another word
+          </button>
+          <button onClick={handleTryAgain} className="cursor-pointer bg-white">
+            Reset word
+          </button>
+        </div>
       </div>
 
       <button
