@@ -8,8 +8,14 @@ import randomNumber from "../utils/randomNumber";
 import useNextWord from "../customHooks/useNextWord";
 
 function GameBoard() {
-  const { isOver, topics, setRandomTopic, randomTopic, setIsReset } =
-    useHangManContext();
+  const {
+    isOver,
+    topics,
+    setRandomTopic,
+    randomTopic,
+    setIsReset,
+    letterInput,
+  } = useHangManContext();
   const { resetGameState } = useNextWord();
   const [seconds, setSeconds] = useState<string | number>("00");
   const [minutes, setMinutes] = useState<string | number>("00");
@@ -32,31 +38,23 @@ function GameBoard() {
   };
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setSeconds((prev) => addZero((Number(prev) + 1) % 60));
+    if (letterInput) {
+      const interval = setInterval(() => {
+        setSeconds((prev) => addZero((Number(prev) + 1) % 60));
 
-      if (seconds === "59") {
-        setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
-      }
+        if (seconds === "59") {
+          setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
+        }
 
-      if (minutes === "59") {
-        setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
-        setSeconds("00");
-      }
-    }, 1000);
+        if (minutes === "59") {
+          setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
+          setSeconds("00");
+        }
+      }, 1000);
 
-    return () => clearInterval(interval);
-  }, [seconds]);
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     if (seconds === "00") {
-  //       setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
-  //     }
-  //   }, 1000);
-
-  //   return () => clearInterval(interval);
-  // }, [seconds]);
+      return () => clearInterval(interval);
+    }
+  }, [seconds, letterInput, isOver]);
 
   return (
     <>
