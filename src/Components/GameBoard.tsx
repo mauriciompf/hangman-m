@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useHangManContext } from "../contexts/useHangManContext";
 import GameOverModal from "./GameOverModal";
 import HangmanFigure from "./HangmanFigure";
@@ -11,6 +11,8 @@ function GameBoard() {
   const { isOver, topics, setRandomTopic, randomTopic, setIsReset } =
     useHangManContext();
   const { resetGameState } = useNextWord();
+  const [seconds, setSeconds] = useState<string | number>("00");
+  const [minutes, setMinutes] = useState<string | number>("00");
 
   useEffect(() => {
     const getRandomTopic = JSON.parse(localStorage.getItem("topic") as string);
@@ -25,20 +27,55 @@ function GameBoard() {
     }
   }, [topics, setRandomTopic, randomTopic]);
 
+  const addZero = (n: string | number) => {
+    return parseInt(n as string) < 10 ? "0" + n : String(n);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setSeconds((prev) => addZero((Number(prev) + 1) % 60));
+
+      if (seconds === "59") {
+        setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
+      }
+
+      if (minutes === "59") {
+        setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
+        setSeconds("00");
+      }
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [seconds]);
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if (seconds === "00") {
+  //       setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
+  //     }
+  //   }, 1000);
+
+  //   return () => clearInterval(interval);
+  // }, [seconds]);
+
   return (
     <>
       <GameOverModal />
       <div className={`${isOver && "cursor-default opacity-50"}`}>
-        <div>
+        <div className="absolute top-6 left-6">
           <button
             onClick={() => {
               resetGameState();
               setIsReset(false);
             }}
-            className="absolute top-6 left-6 cursor-pointer border border-black p-2"
+            className="cursor-pointer border border-black p-2"
           >
             Reset Word
           </button>
+
+          <div className="mt-2 text-center font-mono">
+            {minutes}:{seconds}
+          </div>
         </div>
 
         <HangmanFigure />

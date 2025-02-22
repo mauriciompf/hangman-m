@@ -54,7 +54,7 @@ function LetterInput() {
   useEffect(() => {
     const keyPress = (e: KeyboardEvent) => {
       if (letters.includes(e.key.toUpperCase())) {
-        console.log(e.key);
+        setLetterInput(e.key.toUpperCase());
       }
     };
 
