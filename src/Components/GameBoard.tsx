@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useHangManContext } from "../contexts/useHangManContext";
 import GameOverModal from "./GameOverModal";
 import HangmanFigure from "./HangmanFigure";
@@ -6,19 +6,45 @@ import LetterInput from "./LetterInput";
 import WordDisplay from "./WordDisplay";
 import randomNumber from "../utils/randomNumber";
 import useNextWord from "../customHooks/useNextWord";
+import { useTimeContext } from "../contexts/timeContext";
 
 function GameBoard() {
   const {
+    letterInput,
     isOver,
     topics,
     setRandomTopic,
     randomTopic,
     setIsReset,
-    letterInput,
   } = useHangManContext();
+
+  const { seconds, setSeconds, minutes, setMinutes } = useTimeContext();
   const { resetGameState } = useNextWord();
-  const [seconds, setSeconds] = useState<string | number>("00");
-  const [minutes, setMinutes] = useState<string | number>("00");
+
+  const timerRef = useRef<number | undefined | null>(null);
+
+  const addZero = (n: string | number) =>
+    parseInt(n as string) < 10 ? "0" + n : String(n);
+
+  useEffect(() => {
+    if (!timerRef.current && letterInput) {
+      timerRef.current = setInterval(() => {
+        setSeconds((prev) => addZero((Number(prev) + 1) % 60));
+
+        setMinutes((prevMinutes) => {
+          if (seconds === "59") return addZero((Number(prevMinutes) + 1) % 60);
+          return prevMinutes;
+        });
+      }, 1000);
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, [seconds, letterInput]);
 
   useEffect(() => {
     const getRandomTopic = JSON.parse(localStorage.getItem("topic") as string);
@@ -32,29 +58,6 @@ function GameBoard() {
       localStorage.setItem("topic", JSON.stringify(randomTopic));
     }
   }, [topics, setRandomTopic, randomTopic]);
-
-  const addZero = (n: string | number) => {
-    return parseInt(n as string) < 10 ? "0" + n : String(n);
-  };
-
-  useEffect(() => {
-    if (letterInput) {
-      const interval = setInterval(() => {
-        setSeconds((prev) => addZero((Number(prev) + 1) % 60));
-
-        if (seconds === "59") {
-          setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
-        }
-
-        if (minutes === "59") {
-          setMinutes((prevMinutes) => addZero((Number(prevMinutes) + 1) % 60));
-          setSeconds("00");
-        }
-      }, 1000);
-
-      return () => clearInterval(interval);
-    }
-  }, [seconds, letterInput, isOver]);
 
   return (
     <>

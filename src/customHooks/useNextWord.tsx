@@ -1,3 +1,4 @@
+import { useTimeContext } from "../contexts/timeContext";
 import { useHangManContext } from "../contexts/useHangManContext";
 import randomNumber from "../utils/randomNumber";
 
@@ -12,10 +13,14 @@ function useNextWord() {
     prevWords,
   } = useHangManContext();
 
+  const { setMinutes, setSeconds } = useTimeContext();
+
   const resetGameState = () => {
     setIncorrectLetters([]);
     setCorrectLetters([]);
     setLetterInput("");
+    setMinutes("00");
+    setSeconds("00");
   };
 
   const getRandomTopic = () => {
