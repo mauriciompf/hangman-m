@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useHangManContext } from "../contexts/useHangManContext";
 import GameOverModal from "./GameOverModal";
 import HangmanFigure from "./HangmanFigure";
@@ -18,33 +18,25 @@ function GameBoard() {
     setIsReset,
   } = useHangManContext();
 
-  const { seconds, setSeconds, minutes, setMinutes } = useTimeContext();
+  const { setTime, time } = useTimeContext();
   const { resetGameState } = useNextWord();
 
-  const timerRef = useRef<number | undefined | null>(null);
-
-  const addZero = (n: string | number) =>
-    parseInt(n as string) < 10 ? "0" + n : String(n);
+  const addZero = (x: number | string) => ("0" + x).slice(-2);
 
   useEffect(() => {
-    if (!timerRef.current && letterInput) {
-      timerRef.current = setInterval(() => {
-        setSeconds((prev) => addZero((Number(prev) + 1) % 60));
+    if (letterInput) {
+      const intervalId = setInterval(() => {
+        localStorage.setItem("time", JSON.stringify(time));
 
-        setMinutes((prevMinutes) => {
-          if (seconds === "59") return addZero((Number(prevMinutes) + 1) % 60);
-          return prevMinutes;
-        });
-      }, 1000);
+        return setTime(Number(time) + 1);
+      }, 10);
+
+      return () => clearInterval(intervalId);
     }
+  }, [time, letterInput]);
 
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-        timerRef.current = null;
-      }
-    };
-  }, [seconds, letterInput]);
+  const seconds = addZero(Math.floor((Number(time) % 6000) / 100));
+  const minutes = addZero(Math.floor((Number(time) % 360000) / 6000));
 
   useEffect(() => {
     const getRandomTopic = JSON.parse(localStorage.getItem("topic") as string);

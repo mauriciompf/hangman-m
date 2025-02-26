@@ -7,25 +7,22 @@ import {
 } from "react";
 
 interface timeContextValues {
-  seconds: string | number;
-  setSeconds: Dispatch<SetStateAction<string | number>>;
-  minutes: string | number;
-  setMinutes: Dispatch<SetStateAction<string | number>>;
+  time: string | number;
+  setTime: Dispatch<SetStateAction<string | number>>;
 }
 
 const timeContext = createContext<timeContextValues | null>(null);
 
 function TimeContextProvider({ children }: { children: React.ReactNode }) {
-  const [seconds, setSeconds] = useState<string | number>("00");
-  const [minutes, setMinutes] = useState<string | number>("00");
+  const [time, setTime] = useState<string | number>(
+    Number(JSON.parse(localStorage.getItem("time")!) | 0),
+  );
 
   return (
     <timeContext.Provider
       value={{
-        seconds,
-        setSeconds,
-        minutes,
-        setMinutes,
+        time,
+        setTime,
       }}
     >
       {children}

@@ -13,14 +13,14 @@ function useNextWord() {
     prevWords,
   } = useHangManContext();
 
-  const { setMinutes, setSeconds } = useTimeContext();
+  const { setTime } = useTimeContext();
 
   const resetGameState = () => {
     setIncorrectLetters([]);
     setCorrectLetters([]);
     setLetterInput("");
-    setMinutes("00");
-    setSeconds("00");
+    setTime(0);
+    localStorage.setItem("time", JSON.stringify(0));
   };
 
   const getRandomTopic = () => {
