@@ -6,23 +6,15 @@ import useNextWord from "../customHooks/useNextWord";
 function WinModal() {
   const winRef = useRef<HTMLDivElement | null>(null);
 
-  const {
-    setIsOver,
-    randomWord,
-    topics,
-    setIsWin,
-    isWin,
-    setPrevWords,
-    prevWords,
-  } = useHangManContext();
+  const { setIsOver, randomWord, topics, setIsWin, setPrevWords } =
+    useHangManContext();
   const { resetGameState, selectNewWord } = useNextWord();
 
   useEffect(() => {
     setIsOver(true);
-  }, [setIsOver, prevWords, isWin]);
+  }, []);
 
   const handleCloseModal = () => {
-    setIsOver(false);
     setIsWin(false);
   };
 

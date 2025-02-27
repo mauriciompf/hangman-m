@@ -17,7 +17,6 @@ function LoseModal() {
 
   const handleCloseModal = () => {
     setIsLose(false);
-    setIsOver(false);
   };
 
   const handleAnotherWord = () => {

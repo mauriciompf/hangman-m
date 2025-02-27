@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useHangManContext } from "../contexts/useHangManContext";
 import GameOverModal from "./GameOverModal";
 import HangmanFigure from "./HangmanFigure";
@@ -16,24 +16,39 @@ function GameBoard() {
     setRandomTopic,
     randomTopic,
     setIsReset,
+    isWin,
+    isLose,
+    isReset,
   } = useHangManContext();
 
   const { setTime, time } = useTimeContext();
   const { resetGameState } = useNextWord();
+  const timerRef = useRef<number | undefined>(undefined);
 
   const addZero = (x: number | string) => ("0" + x).slice(-2);
 
   useEffect(() => {
-    if (letterInput) {
-      const intervalId = setInterval(() => {
+    if (!letterInput) return;
+
+    if (!isOver) {
+      timerRef.current = setInterval(() => {
         localStorage.setItem("time", JSON.stringify(time));
 
         return setTime(Number(time) + 1);
       }, 10);
-
-      return () => clearInterval(intervalId);
+    } else {
+      return () => {
+        if (timerRef.current !== undefined) {
+          clearInterval(timerRef.current);
+          timerRef.current = undefined;
+        }
+      };
     }
-  }, [time, letterInput]);
+
+    return () => {
+      if (timerRef.current !== undefined) clearInterval(timerRef.current);
+    };
+  }, [time, letterInput, isOver]);
 
   const seconds = addZero(Math.floor((Number(time) % 6000) / 100));
   const minutes = addZero(Math.floor((Number(time) % 360000) / 6000));
@@ -54,7 +69,9 @@ function GameBoard() {
   return (
     <>
       <GameOverModal />
-      <div className={`${isOver && "cursor-default opacity-50"}`}>
+      <div
+        className={`${(isWin || isLose || isReset) && "cursor-default opacity-50"}`}
+      >
         <div className="absolute top-6 left-6">
           <button
             onClick={() => {

@@ -35,21 +35,26 @@ function LetterInput() {
     setLetterInput,
     correctLetters,
     incorrectLetters,
-    isOver,
+    isReset,
     setIsReset,
     isLose,
     isWin,
+    letterInput,
   } = useHangManContext();
 
   const handleLetter = (letter: string) => {
-    if (incorrectLetters.length >= 6) {
-      if (!isLose || !isWin) setIsReset(true);
+    if (!isLose || !isWin) {
+      if (incorrectLetters.length >= 6) {
+        setIsReset(true);
 
-      return;
+        return;
+      }
+
+      setLetterInput(letter);
     }
-
-    setLetterInput(letter);
   };
+
+  console.log(letterInput);
 
   useEffect(() => {
     const keyPress = (e: KeyboardEvent) => {
@@ -71,16 +76,12 @@ function LetterInput() {
         <button
           onClick={() => handleLetter(letter)}
           key={letter}
-          // disabled={
-          //   correctLetters.includes(letter) ||
-          //   incorrectLetters.includes(letter) ||
-          //   incorrectLetters.length === 6
-          // }
+          disabled={isWin || isReset || isLose}
           className={`${
             correctLetters.includes(letter) || incorrectLetters.includes(letter)
               ? "cursor-not-allowed opacity-30"
               : "cursor-pointer"
-          } ${isOver && "!cursor-default"} rounded-sm border-x-4 border-t-2 border-b-8 border-gray-300 p-1 px-5 font-bold select-none`}
+          } ${isWin || isLose || (isReset && "!cursor-default")} rounded-sm border-x-4 border-t-2 border-b-8 border-gray-300 p-1 px-5 font-bold select-none`}
         >
           {letter}
         </button>

@@ -2,13 +2,12 @@ import { useHangManContext } from "../contexts/useHangManContext";
 import useNextWord from "../customHooks/useNextWord";
 
 function ResetModal() {
-  const { setIsReset, setIsOver } = useHangManContext();
+  const { setIsReset } = useHangManContext();
 
   const { resetGameState, selectNewWord } = useNextWord();
 
   const handleCloseModal = () => {
     setIsReset(false);
-    setIsOver(false);
   };
 
   const handleResetWord = () => {
