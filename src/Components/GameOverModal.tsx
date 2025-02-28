@@ -17,17 +17,10 @@ function GameOverModal() {
   } = useHangManContext();
 
   useEffect(() => {
-    if (correctLetters.length === randomWord?.replaceAll(" ", "")!.length) {
-      setTimeout(() => {
-        setIsWin(true);
-      }, 1500);
-    }
+    if (correctLetters.length === randomWord?.replaceAll(" ", "")!.length)
+      setIsWin(true);
 
-    if (incorrectLetters.length === 6) {
-      setTimeout(() => {
-        setIsLose(true);
-      }, 500);
-    }
+    if (incorrectLetters.length === 6) setIsLose(true);
   }, [correctLetters, incorrectLetters, randomWord]);
 
   return (

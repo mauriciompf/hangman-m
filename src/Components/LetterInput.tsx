@@ -39,22 +39,17 @@ function LetterInput() {
     setIsReset,
     isLose,
     isWin,
-    letterInput,
   } = useHangManContext();
 
   const handleLetter = (letter: string) => {
-    if (!isLose || !isWin) {
-      if (incorrectLetters.length >= 6) {
-        setIsReset(true);
+    if (incorrectLetters.length >= 6) {
+      setIsReset(true);
 
-        return;
-      }
-
-      setLetterInput(letter);
+      return 0;
     }
-  };
 
-  console.log(letterInput);
+    setLetterInput(letter);
+  };
 
   useEffect(() => {
     const keyPress = (e: KeyboardEvent) => {
