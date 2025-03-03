@@ -67,35 +67,37 @@ function GameBoard() {
   }, [topics, setRandomTopic, randomTopic]);
 
   return (
-    <>
+    <div className="h-full bg-[#172525] px-30 py-12">
       <GameOverModal />
       <div
         className={`${(isWin || isLose || isReset) && "cursor-default opacity-50"}`}
       >
-        <div className="absolute top-6 left-6">
+        <div className={`absolute top-12 left-6 md:top-12 md:left-32`}>
+          <div className="mb-2 py-1 text-center font-mono text-amber-300">
+            {minutes}:{seconds}
+          </div>
+
           <button
             onClick={() => {
               resetGameState();
               setIsReset(false);
             }}
-            className="cursor-pointer border border-black p-2"
+            className="cursor-pointer border border-black bg-white p-2"
           >
             Reset Word
           </button>
-
-          <div className="mt-2 text-center font-mono">
-            {minutes}:{seconds}
-          </div>
         </div>
 
         <HangmanFigure />
 
-        <p className="relative -bottom-10 text-center">{randomTopic}</p>
+        <p className="relative -bottom-10 text-center font-bold text-white">
+          {randomTopic}
+        </p>
 
         <WordDisplay />
         <LetterInput />
       </div>
-    </>
+    </div>
   );
 }
 

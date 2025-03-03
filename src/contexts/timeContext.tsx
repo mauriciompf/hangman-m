@@ -6,12 +6,12 @@ import {
   useState,
 } from "react";
 
-interface timeContextValues {
+interface TimeContextValues {
   time: string | number;
   setTime: Dispatch<SetStateAction<string | number>>;
 }
 
-const timeContext = createContext<timeContextValues | null>(null);
+const timeContext = createContext<TimeContextValues | null>(null);
 
 function TimeContextProvider({ children }: { children: React.ReactNode }) {
   const [time, setTime] = useState<string | number>(

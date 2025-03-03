@@ -66,7 +66,7 @@ function LetterInput() {
   }, []);
 
   return (
-    <div className="mt-10 flex flex-wrap justify-center gap-2">
+    <div className="invisible mt-10 flex flex-wrap justify-center gap-2 md:visible">
       {letters.map((letter) => (
         <button
           onClick={() => handleLetter(letter)}
@@ -76,7 +76,7 @@ function LetterInput() {
             correctLetters.includes(letter) || incorrectLetters.includes(letter)
               ? "cursor-not-allowed opacity-30"
               : "cursor-pointer"
-          } ${isWin || isLose || (isReset && "!cursor-default")} rounded-sm border-x-4 border-t-2 border-b-8 border-gray-300 p-1 px-5 font-bold select-none`}
+          } ${isWin || isLose || (isReset && "!cursor-default")} rounded-sm border-x-4 border-t-2 border-b-8 border-gray-300 bg-white p-1 px-5 font-bold select-none`}
         >
           {letter}
         </button>
