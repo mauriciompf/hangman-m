@@ -35,7 +35,7 @@ function HangmanFigure() {
           </div>
         </div>
       </div>
-      <div className="h-[10px] w-[260px] bg-white"></div>
+      <div className="h-[10px] w-[260px] rounded-sm bg-white"></div>
     </div>
   );
 }

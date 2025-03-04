@@ -56,7 +56,7 @@ function WordDisplay() {
     loading &&
     randomWord && (
       <div className="mt-14">
-        <div className="mx-auto flex w-[80%] flex-wrap justify-center gap-x-4 gap-y-2 md:w-[100%] md:gap-y-15">
+        <div className="mx-auto flex w-[80%] flex-wrap justify-center gap-x-4 gap-y-2 md:w-[100%] md:gap-y-12">
           {randomWord
             .toUpperCase()
             .split("")
@@ -68,7 +68,7 @@ function WordDisplay() {
                 <div className="h-10 text-3xl font-bold text-yellow-300 select-none">
                   {correctLetters.includes(letter) ? letter : ""}
                 </div>
-                <div className="h-1.5 w-8 bg-white md:w-13"></div>
+                <div className="h-1.5 w-8 rounded-sm bg-white md:w-13"></div>
               </div>
             ))}
         </div>

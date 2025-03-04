@@ -66,7 +66,7 @@ function LetterInput() {
   }, []);
 
   return (
-    <div className="invisible mt-10 flex flex-wrap justify-center gap-2 md:visible">
+    <div className="mt-10 hidden flex-wrap justify-center gap-2 md:flex">
       {letters.map((letter) => (
         <button
           onClick={() => handleLetter(letter)}

@@ -1,39 +1,97 @@
 [
   {
-    "topic": "Famous Landmarks",
+    "topic": "Space",
     "words": [
-      "Eiffel Tower",
-      "Great Wall of China",
-      "Statue of Liberty",
-      "Machu Picchu",
-      "Taj Mahal"
+      "Planets",
+      "Stars",
+      "Moon",
+      "Rocket",
+      "Galaxy",
+      "Asteroid",
+      "Comet",
+      "Satellite",
+      "Nebula",
+      "Blackhole"
     ],
     "id": 0
   },
   {
     "topic": "Animals",
-    "words": ["Elephant", "Dolphin", "Tiger", "Penguin", "Kangaroo"],
+    "words": [
+      "Elephant",
+      "Dolphin",
+      "Tiger",
+      "Penguin",
+      "Kangaroo",
+      "Giraffe",
+      "Zebra",
+      "Cheetah",
+      "Panda",
+      "Koala"
+    ],
     "id": 1
   },
   {
     "topic": "Fruits & Vegetables",
-    "words": ["Apple", "Carrot", "Banana", "Broccoli", "Strawberry"],
+    "words": [
+      "Apple",
+      "Carrot",
+      "Banana",
+      "Broccoli",
+      "Strawberry",
+      "Pineapple",
+      "Cucumber",
+      "Watermelon",
+      "Spinach",
+      "Blueberry"
+    ],
     "id": 2
   },
   {
-    "topic": "Video Games",
+    "topic": "Ocean",
     "words": [
-      "The Legend of Zelda",
-      "Minecraft",
-      "Super Mario Odyssey",
-      "Elden Ring",
-      "Super Metroid"
+      "Abyss",
+      "Coral",
+      "Tidal",
+      "Kelp",
+      "Brine",
+      "Jellyfish",
+      "Seahorse",
+      "Lobster",
+      "Squid",
+      "Whale"
     ],
     "id": 3
   },
   {
     "topic": "Musical Instruments",
-    "words": ["Piano", "Guitar", "Violin", "Drums", "Saxophone"],
+    "words": [
+      "Piano",
+      "Guitar",
+      "Violin",
+      "Drums",
+      "Saxophone",
+      "Flute",
+      "Trumpet",
+      "Cello",
+      "Harp",
+      "Clarinet"
+    ],
     "id": 4
+  },
+  {
+    "topic": "Tall plant",
+    "words": ["Tree"],
+    "id": 5
+  },
+  {
+    "topic": "Animal that climbs trees",
+    "words": ["Bear"],
+    "id": 6
+  },
+  {
+    "topic": "Sea creature with tentacles",
+    "words": ["Octopus"],
+    "id": 7
   }
 ]
