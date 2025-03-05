@@ -53,6 +53,8 @@ function LetterInput() {
 
   useEffect(() => {
     const keyPress = (e: KeyboardEvent) => {
+      if (incorrectLetters.length === 6) return;
+
       if (letters.includes(e.key.toUpperCase())) {
         setLetterInput(e.key.toUpperCase());
       }
@@ -63,7 +65,7 @@ function LetterInput() {
     return () => {
       window.removeEventListener("keydown", keyPress);
     };
-  }, []);
+  }, [incorrectLetters]);
 
   return (
     <div className="mt-10 hidden flex-wrap justify-center gap-2 md:flex">
@@ -75,8 +77,8 @@ function LetterInput() {
           className={`${
             correctLetters.includes(letter) || incorrectLetters.includes(letter)
               ? "cursor-not-allowed opacity-30"
-              : "cursor-pointer"
-          } ${isWin || isLose || (isReset && "!cursor-default")} rounded-sm border-x-4 border-t-2 border-b-8 border-gray-300 bg-white p-1 px-5 font-bold select-none`}
+              : `${(isWin || isLose || isReset) && "hover:opacity-100 focus:opacity-100"} cursor-pointer hover:opacity-75 focus:opacity-75`
+          } ${(isWin || isLose || isReset) && "!cursor-default"} rounded-sm border-x-4 border-t-2 border-b-8 border-gray-300 bg-white p-1 px-5 font-bold select-none`}
         >
           {letter}
         </button>

@@ -1,11 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { closeIcon } from "./Icons";
 import { useHangManContext } from "../contexts/useHangManContext";
 import useNextWord from "../customHooks/useNextWord";
 
 function LoseModal() {
-  const loseRef = useRef<HTMLDivElement | null>(null);
-
   const { setIsOver, randomWord, setIsLose } = useHangManContext();
   const { resetGameState, selectNewWord } = useNextWord();
 
@@ -31,10 +29,7 @@ function LoseModal() {
   };
 
   return (
-    <div
-      ref={loseRef}
-      className="absolute top-[50%] left-[50%] z-10 w-[250px] -translate-x-[50%] -translate-y-[50%] bg-gray-300 p-6"
-    >
+    <div className="absolute top-[50%] left-[50%] z-10 w-[250px] -translate-x-[50%] -translate-y-[50%] rounded-sm bg-gray-300 p-6">
       <h1 className="text-center text-2xl font-bold">You Lose!</h1>
 
       <div className="mt-4 grid gap-2">
@@ -55,11 +50,14 @@ function LoseModal() {
         <div className="flex gap-4 font-bold">
           <button
             onClick={handleAnotherWord}
-            className="cursor-pointer bg-white"
+            className="cursor-pointer rounded-sm bg-white py-2 transition-colors hover:bg-[#585858] hover:text-white focus:bg-[#585858] focus:text-white"
           >
             Try another word
           </button>
-          <button onClick={handleTryAgain} className="cursor-pointer bg-white">
+          <button
+            onClick={handleTryAgain}
+            className="cursor-pointer rounded-sm bg-white py-2 transition-colors hover:bg-[#585858] hover:text-white focus:bg-[#585858] focus:text-white"
+          >
             Reset word
           </button>
         </div>

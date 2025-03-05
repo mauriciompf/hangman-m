@@ -70,7 +70,7 @@ function GameBoard() {
     <div className="h-full bg-[#172525] py-12 md:px-30">
       <GameOverModal />
       <div
-        className={`${(isWin || isLose || isReset) && "cursor-default opacity-50"}`}
+        className={`${(isWin || isLose || isReset) && "cursor-default opacity-50 transition-opacity"}`}
       >
         <div className={`absolute top-8 left-6 md:top-12 md:left-32`}>
           <div className="py-1 text-center font-mono text-xl text-amber-300 md:mb-2">
@@ -82,7 +82,8 @@ function GameBoard() {
               resetGameState();
               setIsReset(false);
             }}
-            className="cursor-pointer rounded-sm border border-black bg-white p-2"
+            disabled={isWin || isLose || isReset}
+            className={`${(isWin || isLose || isReset) && "!cursor-default"} cursor-pointer rounded-sm border border-black bg-white p-2 transition-colors hover:bg-[#585858] hover:text-white focus:bg-[#585858] focus:text-white`}
           >
             Reset Word
           </button>
@@ -90,7 +91,7 @@ function GameBoard() {
 
         <HangmanFigure />
 
-        <p className="relative -bottom-10 text-center text-3xl font-bold text-white">
+        <p className="relative -bottom-10 text-center text-3xl font-bold tracking-wide text-white">
           {randomTopic}
         </p>
 
