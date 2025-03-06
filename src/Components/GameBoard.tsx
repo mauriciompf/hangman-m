@@ -7,6 +7,7 @@ import WordDisplay from "./WordDisplay";
 import randomNumber from "../utils/randomNumber";
 import useNextWord from "../customHooks/useNextWord";
 import { useTimeContext } from "../contexts/timeContext";
+import HintButton from "./HintButton";
 
 function GameBoard() {
   const {
@@ -90,13 +91,24 @@ function GameBoard() {
         </div>
 
         <HangmanFigure />
-
         <p className="relative -bottom-10 text-center text-3xl font-bold tracking-wide text-white">
           {randomTopic}
         </p>
 
         <WordDisplay />
         <LetterInput />
+
+        <div className="relative">
+          <div className="mt-14 grid place-items-center md:absolute md:top-18 md:right-32">
+            <div className="cursor-pointer rounded-sm bg-amber-500 px-4 py-3 text-center font-bold text-white transition-colors hover:bg-amber-600 md:py-2">
+              HINT
+            </div>
+
+            <div className="absolute -bottom-20 rounded-sm bg-amber-100 p-2 text-center italic">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
