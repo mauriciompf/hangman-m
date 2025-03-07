@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useHangManContext } from "../contexts/useHangManContext";
 import GameOverModal from "./GameOverModal";
 import HangmanFigure from "./HangmanFigure";
@@ -7,7 +7,6 @@ import WordDisplay from "./WordDisplay";
 import randomNumber from "../utils/randomNumber";
 import useNextWord from "../customHooks/useNextWord";
 import { useTimeContext } from "../contexts/timeContext";
-import HintButton from "./HintButton";
 
 function GameBoard() {
   const {
@@ -25,6 +24,7 @@ function GameBoard() {
   const { setTime, time } = useTimeContext();
   const { resetGameState } = useNextWord();
   const timerRef = useRef<number | undefined>(undefined);
+  const [showHint, setShowHint] = useState(false);
 
   const addZero = (x: number | string) => ("0" + x).slice(-2);
 
@@ -67,6 +67,12 @@ function GameBoard() {
     }
   }, [topics, setRandomTopic, randomTopic]);
 
+  const topicObj = topics.find((obj) => obj.topic === randomTopic) as
+    | { words: { hint: string }[] }
+    | undefined;
+
+  const hint = topicObj?.words[0]?.hint;
+
   return (
     <div className="h-full bg-[#172525] py-12 md:px-30">
       <GameOverModal />
@@ -100,13 +106,19 @@ function GameBoard() {
 
         <div className="relative">
           <div className="mt-14 grid place-items-center md:absolute md:top-18 md:right-32">
-            <div className="cursor-pointer rounded-sm bg-amber-500 px-4 py-3 text-center font-bold text-white transition-colors hover:bg-amber-600 md:py-2">
+            <div
+              className="cursor-pointer rounded-sm bg-amber-500 px-4 py-3 text-center font-bold text-white transition-colors hover:bg-amber-600 md:py-2"
+              onMouseEnter={() => setShowHint(true)}
+              onMouseLeave={() => setShowHint(false)}
+            >
               HINT
             </div>
 
-            <div className="absolute -bottom-20 rounded-sm bg-amber-100 p-2 text-center italic">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            </div>
+            {showHint && (
+              <div className="absolute -bottom-20 rounded-sm bg-amber-100 p-2 text-center italic">
+                {hint}
+              </div>
+            )}
           </div>
         </div>
       </div>

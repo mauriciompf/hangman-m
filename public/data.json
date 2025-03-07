@@ -2,96 +2,96 @@
   {
     "topic": "Space",
     "words": [
-      "Planets",
-      "Stars",
-      "Moon",
-      "Rocket",
-      "Galaxy",
-      "Asteroid",
-      "Comet",
-      "Satellite",
-      "Nebula",
-      "Blackhole"
+      { "word": "Planets", "hint": "Orbits sun" },
+      { "word": "Stars", "hint": "Shines at night" },
+      { "word": "Moon", "hint": "Earth's satellite" },
+      { "word": "Rocket", "hint": "Space vehicle" },
+      { "word": "Galaxy", "hint": "Star system" },
+      { "word": "Asteroid", "hint": "Rocky body" },
+      { "word": "Comet", "hint": "Icy traveler" },
+      { "word": "Satellite", "hint": "Orbits Earth" },
+      { "word": "Nebula", "hint": "Cosmic cloud" },
+      { "word": "Blackhole", "hint": "Gravity trap" }
     ],
     "id": 0
   },
   {
     "topic": "Animals",
     "words": [
-      "Elephant",
-      "Dolphin",
-      "Tiger",
-      "Penguin",
-      "Kangaroo",
-      "Giraffe",
-      "Zebra",
-      "Cheetah",
-      "Panda",
-      "Koala"
+      { "word": "Elephant", "hint": "Large tusks" },
+      { "word": "Dolphin", "hint": "Smart swimmer" },
+      { "word": "Tiger", "hint": "Striped predator" },
+      { "word": "Penguin", "hint": "Antarctic bird" },
+      { "word": "Kangaroo", "hint": "Hops with pouch" },
+      { "word": "Giraffe", "hint": "Long neck" },
+      { "word": "Zebra", "hint": "Black & white stripes" },
+      { "word": "Cheetah", "hint": "Fastest runner" },
+      { "word": "Panda", "hint": "Bamboo lover" },
+      { "word": "Koala", "hint": "Eucalyptus eater" }
     ],
     "id": 1
   },
   {
     "topic": "Fruits & Vegetables",
     "words": [
-      "Apple",
-      "Carrot",
-      "Banana",
-      "Broccoli",
-      "Strawberry",
-      "Pineapple",
-      "Cucumber",
-      "Watermelon",
-      "Spinach",
-      "Blueberry"
+      { "word": "Apple", "hint": "Red or green" },
+      { "word": "Carrot", "hint": "Orange root" },
+      { "word": "Banana", "hint": "Yellow peel" },
+      { "word": "Broccoli", "hint": "Green florets" },
+      { "word": "Strawberry", "hint": "Red & seedy" },
+      { "word": "Pineapple", "hint": "Spiky skin" },
+      { "word": "Cucumber", "hint": "Long & green" },
+      { "word": "Watermelon", "hint": "Summer fruit" },
+      { "word": "Spinach", "hint": "Leafy green" },
+      { "word": "Blueberry", "hint": "Tiny & blue" }
     ],
     "id": 2
   },
   {
     "topic": "Ocean",
     "words": [
-      "Abyss",
-      "Coral",
-      "Tidal",
-      "Kelp",
-      "Brine",
-      "Jellyfish",
-      "Seahorse",
-      "Lobster",
-      "Squid",
-      "Whale"
+      { "word": "Abyss", "hint": "Deep ocean" },
+      { "word": "Coral", "hint": "Underwater reef" },
+      { "word": "Tidal", "hint": "Sea level change" },
+      { "word": "Kelp", "hint": "Seaweed forest" },
+      { "word": "Brine", "hint": "Salty water" },
+      { "word": "Jellyfish", "hint": "Stinging tentacles" },
+      { "word": "Seahorse", "hint": "Curly tail" },
+      { "word": "Lobster", "hint": "Clawed crustacean" },
+      { "word": "Squid", "hint": "Eight arms" },
+      { "word": "Whale", "hint": "Giant mammal" }
     ],
     "id": 3
   },
   {
     "topic": "Musical Instruments",
     "words": [
-      "Piano",
-      "Guitar",
-      "Violin",
-      "Drums",
-      "Saxophone",
-      "Flute",
-      "Trumpet",
-      "Cello",
-      "Harp",
-      "Clarinet"
+      { "word": "Piano", "hint": "Black & white keys" },
+      { "word": "Guitar", "hint": "Six strings" },
+      { "word": "Violin", "hint": "Bowed strings" },
+      { "word": "Drums", "hint": "Percussion instrument" },
+      { "word": "Saxophone", "hint": "Brass reed" },
+      { "word": "Flute", "hint": "Wind instrument" },
+      { "word": "Trumpet", "hint": "Brass horn" },
+      { "word": "Cello", "hint": "Large violin" },
+      { "word": "Harp", "hint": "Plucked strings" },
+      { "word": "Clarinet", "hint": "Single reed" }
     ],
     "id": 4
   },
   {
     "topic": "Tall plant",
-    "words": ["Tree"],
+    "words": [{ "word": "Tree", "hint": "Woody trunk" }],
     "id": 5
   },
   {
     "topic": "Animal that climbs trees",
-    "words": ["Bear"],
+    "words": [{ "word": "Bear", "hint": "Hibernates" }],
     "id": 6
   },
   {
     "topic": "Sea creature with tentacles",
-    "words": ["Octopus"],
+    "words": [{ "word": "Octopus", "hint": "Eight arms" }],
     "id": 7
   }
 ]

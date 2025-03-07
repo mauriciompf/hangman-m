@@ -9,7 +9,7 @@ import {
 
 interface Topics {
   topic: string;
-  words: string;
+  words: { word: string; hint: string };
   id: number;
 }
 

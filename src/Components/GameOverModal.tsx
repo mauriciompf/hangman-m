@@ -17,8 +17,10 @@ function GameOverModal() {
   } = useHangManContext();
 
   useEffect(() => {
-    if (correctLetters.length === randomWord?.replaceAll(" ", "")!.length)
-      setIsWin(true);
+    if (!randomWord) return;
+
+    const wordWithoutSpaces = randomWord.replace(/\s/g, "");
+    if (correctLetters.length === wordWithoutSpaces.length) setIsWin(true);
 
     if (incorrectLetters.length === 6) setIsLose(true);
   }, [correctLetters, incorrectLetters, randomWord]);

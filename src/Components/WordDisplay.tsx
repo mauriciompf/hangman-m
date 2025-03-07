@@ -21,12 +21,12 @@ function WordDisplay() {
 
     const getRandomWord = JSON.parse(localStorage.getItem("word")!);
 
-    const currentTopic = topics.find((obj) => obj.topic === randomTopic);
+    const topicObj = topics.find((obj) => obj.topic === randomTopic) as
+      | { words: { word: string }[] }
+      | undefined;
 
-    if (!getRandomWord && currentTopic) {
-      setRandomWord(
-        currentTopic.words[randomNumber(currentTopic.words.length)],
-      );
+    if (!getRandomWord && topicObj) {
+      setRandomWord(topicObj.words[randomNumber(topicObj.words.length)].word);
     }
 
     if (randomWord && letterInput) {
