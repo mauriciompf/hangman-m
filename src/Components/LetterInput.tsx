@@ -68,12 +68,14 @@ function LetterInput() {
   }, [incorrectLetters]);
 
   return (
-    <div className="mt-10 hidden flex-wrap justify-center gap-2 md:flex">
+    <div className="mt-10 hidden flex-wrap justify-center gap-2 min-[658px]:flex">
       {letters.map((letter) => (
         <button
           onClick={() => handleLetter(letter)}
           key={letter}
-          disabled={isWin || isReset || isLose}
+          disabled={
+            correctLetters.includes(letter) || incorrectLetters.includes(letter)
+          }
           className={`${
             correctLetters.includes(letter) || incorrectLetters.includes(letter)
               ? "cursor-not-allowed opacity-30"

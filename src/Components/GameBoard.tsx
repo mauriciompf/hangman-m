@@ -73,7 +73,7 @@ function GameBoard() {
   const hint = topicObj?.words[0]?.hint;
 
   return (
-    <div className="h-full bg-[#172525] py-12 md:px-30">
+    <div className="mx-auto h-full bg-[#172525] py-12 min-[1440px]:w-[70%] min-[1440px]:px-50 min-[1440px]:py-40 lg:w-[100%] lg:px-30">
       <GameOverModal />
       <div
         className={`${(isWin || isLose || isReset) && "cursor-default opacity-50 transition-opacity"}`}
