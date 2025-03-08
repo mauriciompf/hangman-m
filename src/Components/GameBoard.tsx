@@ -7,6 +7,7 @@ import WordDisplay from "./WordDisplay";
 import randomNumber from "../utils/randomNumber";
 import useNextWord from "../customHooks/useNextWord";
 import { useTimeContext } from "../contexts/timeContext";
+import addZero from "../utils/addZero";
 
 function GameBoard() {
   const {
@@ -25,8 +26,6 @@ function GameBoard() {
   const { resetGameState } = useNextWord();
   const timerRef = useRef<number | undefined>(undefined);
   const [showHint, setShowHint] = useState(false);
-
-  const addZero = (x: number | string) => ("0" + x).slice(-2);
 
   useEffect(() => {
     if (!letterInput) return;
@@ -104,7 +103,7 @@ function GameBoard() {
         <WordDisplay />
         <LetterInput />
 
-        <div className="mt-14 grid place-items-center md:absolute md:top-12 md:right-32">
+        <div className="mx-auto mt-14 grid w-[150px] place-items-center md:absolute md:top-12 md:right-32">
           <div
             className="cursor-pointer rounded-sm bg-amber-500 px-4 py-3 text-center font-bold text-white transition-colors hover:bg-amber-600 md:py-2"
             onMouseEnter={() => setShowHint(true)}
@@ -114,7 +113,7 @@ function GameBoard() {
           </div>
 
           {showHint && (
-            <div className="absolute -bottom-20 rounded-sm bg-amber-100 p-2 text-center italic md:-bottom-13">
+            <div className="relative -bottom-10 w-full rounded-sm bg-amber-100 p-2 text-center italic md:-bottom-5">
               {hint}
             </div>
           )}

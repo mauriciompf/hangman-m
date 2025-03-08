@@ -2,13 +2,25 @@ import { useEffect, useRef } from "react";
 import { closeIcon } from "./Icons";
 import { useHangManContext } from "../contexts/useHangManContext";
 import useNextWord from "../customHooks/useNextWord";
+import { useTimeContext } from "../contexts/timeContext";
+import addZero from "../utils/addZero";
 
 function WinModal() {
+  const { time } = useTimeContext();
+  const {
+    setIsOver,
+    randomWord,
+    topics,
+    setIsWin,
+    setPrevWords,
+    incorrectLetters,
+  } = useHangManContext();
+  const { resetGameState, selectNewWord } = useNextWord();
+
   const winRef = useRef<HTMLDivElement | null>(null);
 
-  const { setIsOver, randomWord, topics, setIsWin, setPrevWords } =
-    useHangManContext();
-  const { resetGameState, selectNewWord } = useNextWord();
+  const seconds = addZero(Math.floor((Number(time) % 6000) / 100));
+  const minutes = addZero(Math.floor((Number(time) % 360000) / 6000));
 
   useEffect(() => setIsOver(true), []);
 
@@ -32,7 +44,7 @@ function WinModal() {
     >
       <h1 className="text-center text-2xl font-bold">You Win!</h1>
 
-      <div className="mt-4 grid gap-2">
+      <div className="mt-4 grid gap-4">
         <button
           onClick={handleNextWord}
           className="mx-auto cursor-pointer rounded-sm bg-black px-4 py-2 text-white transition-colors hover:bg-[#585858] hover:text-white focus:bg-[#585858] focus:text-white"
@@ -40,10 +52,20 @@ function WinModal() {
           Next word
         </button>
 
-        <p>Word: {randomWord}</p>
-        <p>Hour: </p>
-        <p>Incorrect guesses: </p>
-        <p>Timer: </p>
+        <div className="grid pr-4">
+          <p className="flex justify-between">
+            Word: <span>{randomWord}</span>
+          </p>
+          <p className="flex justify-between">
+            Incorrect guesses: <span>{incorrectLetters.length}</span>
+          </p>
+          <p className="flex justify-between">
+            Timer:{" "}
+            <span>
+              {minutes}:{seconds}
+            </span>
+          </p>
+        </div>
       </div>
 
       <button
