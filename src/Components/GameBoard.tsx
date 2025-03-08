@@ -104,22 +104,20 @@ function GameBoard() {
         <WordDisplay />
         <LetterInput />
 
-        <div className="relative">
-          <div className="mt-14 grid place-items-center md:absolute md:top-18 md:right-32">
-            <div
-              className="cursor-pointer rounded-sm bg-amber-500 px-4 py-3 text-center font-bold text-white transition-colors hover:bg-amber-600 md:py-2"
-              onMouseEnter={() => setShowHint(true)}
-              onMouseLeave={() => setShowHint(false)}
-            >
-              HINT
-            </div>
-
-            {showHint && (
-              <div className="absolute -bottom-20 rounded-sm bg-amber-100 p-2 text-center italic">
-                {hint}
-              </div>
-            )}
+        <div className="mt-14 grid place-items-center md:absolute md:top-12 md:right-32">
+          <div
+            className="cursor-pointer rounded-sm bg-amber-500 px-4 py-3 text-center font-bold text-white transition-colors hover:bg-amber-600 md:py-2"
+            onMouseEnter={() => setShowHint(true)}
+            onMouseLeave={() => setShowHint(false)}
+          >
+            HINT
           </div>
+
+          {showHint && (
+            <div className="absolute -bottom-20 rounded-sm bg-amber-100 p-2 text-center italic md:-bottom-13">
+              {hint}
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -9,22 +9,20 @@ function LoseModal() {
 
   const [showWord, setShowWord] = useState(false);
 
-  useEffect(() => {
-    setIsOver(true);
-  }, [setIsOver]);
+  useEffect(() => setIsOver(true), [setIsOver]);
 
-  const handleCloseModal = () => {
-    setIsLose(false);
-  };
+  const handleCloseModal = () => setIsLose(false);
 
   const handleAnotherWord = () => {
     handleCloseModal();
+
     resetGameState();
     selectNewWord();
   };
 
   const handleTryAgain = () => {
     handleCloseModal();
+
     resetGameState();
   };
 

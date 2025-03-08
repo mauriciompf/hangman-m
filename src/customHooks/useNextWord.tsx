@@ -11,20 +11,13 @@ function useNextWord() {
     setRandomTopic,
     setLetterInput,
     prevWords,
+    setIsOver,
   } = useHangManContext();
 
   const { setTime } = useTimeContext();
 
-  const resetGameState = () => {
-    setIncorrectLetters([]);
-    setCorrectLetters([]);
-    setLetterInput("");
-    setTime(0);
-    localStorage.setItem("time", JSON.stringify(0));
-  };
-
   const getRandomTopic = () => {
-    const topicNames = topics.map((a) => a.topic);
+    const topicNames = topics.map((obj) => obj.topic);
     const newTopic = topicNames[randomNumber(topicNames.length)];
     setRandomTopic(newTopic);
     localStorage.setItem("topic", JSON.stringify(newTopic));
@@ -32,16 +25,29 @@ function useNextWord() {
     return newTopic;
   };
 
-  const selectNewWord = () => {
-    const currentTopic = topics.find((obj) => obj.topic === getRandomTopic());
+  const resetGameState = () => {
+    setIncorrectLetters([]);
+    setCorrectLetters([]);
+    setLetterInput("");
+    setTime(0);
+    setIsOver(false);
+    localStorage.setItem("time", JSON.stringify(0));
+  };
 
-    if (currentTopic) {
+  const selectNewWord = () => {
+    const topicObj = topics.find((obj) => obj.topic === getRandomTopic()) as
+      | { words: { word: string }[] }
+      | undefined;
+
+    if (topicObj) {
+      // console.log(topicObj.words[randomNumber(topicObj.words.length)].word)
+
       let newWord;
       let attempts = 0;
-      const maxAttempts = currentTopic.words.length;
+      const maxAttempts = topicObj.words.length;
 
       do {
-        newWord = currentTopic.words[randomNumber(currentTopic.words.length)];
+        newWord = topicObj.words[randomNumber(topicObj.words.length)].word;
         attempts++;
       } while (prevWords.includes(newWord) && attempts < maxAttempts);
 
